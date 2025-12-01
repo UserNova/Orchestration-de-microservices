@@ -1,27 +1,28 @@
 package com.example.service_voiture.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Voiture {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String marque;
     private String matricule;
     private String model;
-    private Long id_client;
+
+    // Nom exact du champ persistant = clientId
+    private Long clientId;
 
     @Transient
+    @ManyToOne
     private Client client;
 }
